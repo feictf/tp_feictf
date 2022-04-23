@@ -1,6 +1,6 @@
 # pwn.college
 
-Deploy a pwn.college instance! Hello from jacob - test pre nema
+Deploy a pwn.college instance! Hello from jacob - test pre nema tetet
 
 ## Details
 
