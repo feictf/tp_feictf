@@ -28,22 +28,22 @@ for config_option in missing_warnings:
     if not config_value:
         warnings.warn(f"Configuration Warning: {config_option} is not set in the environment")
 
-
+from CTFd.constants.themes import DEFAULT_THEME
 def bootstrap():
     from .models import DojoChallenges
     from .pages.discord import discord_reputation
     from .utils import CHALLENGES_DIR, validate_dojo_data
 
-    set_config("ctf_name", "pwn.college")
-    set_config("ctf_description", "pwn.college")
-    set_config("user_mode", "users")
+    set_config("ctf_name", "feictf")
+    set_config("ctf_description", "feictf")
+    set_config("user_mode", "teams")
 
     set_config("challenge_visibility", "public")
     set_config("registration_visibility", "public")
     set_config("score_visibility", "public")
     set_config("account_visibility", "public")
 
-    set_config("ctf_theme", "dojo_theme")
+    set_config("ctf_theme", DEFAULT_THEME)
 
     modules_path = CHALLENGES_DIR / "modules.yml"
     modules = modules_path.read_text() if modules_path.exists() else (

@@ -293,14 +293,61 @@ def integrations():
     else:
         abort(403)
 
+'''
+import os
+from flask import render_template, request, redirect, url_for
+from werkzeug import secure_filename
+uploads_dir = os.path.join(app.instance_path, 'uploads')
+os.makedirs(uploads_dir, exists_ok=True)
+@views.route("/upload_challenge", methods=["GET"])
+def upload_challenge():
+    if request.method == 'POST':
+        profile = request.files['profile']
+        profile.save(os.path.join(uploads_dir, secure_filename(profile.filename)))
+        for file in request.files.getlist('charts'):
+            file.save(os.path.join(uploads_dir, secure_filename(file.name)))
+        #return redirect(url_for('upload'))
+    return ""
+'''
 
-@views.route("/notifications", methods=["GET"])
+@views.route("/notifications", methods=["GET", "POST"])
 def notifications():
+    from flask_wtf.csrf import CSRFProtect
+    app.secret_key = 'example'
+    #To Register CSRF protection globally for the app
+    csrf = CSRFProtect(app)
+    csrf.init_app(app)
+
     notifications = Notifications.query.order_by(Notifications.id.desc()).all()
-    return render_template("notifications.html", notifications=notifications)
+    if request.method == 'POST':
+        # check if the post request has the file part
+        if 'file' not in request.files:
+            flash('No file part')
+            return redirect(request.url)
+        file = request.files['file']
+        # If the user does not select a file, the browser submits an
+        # empty file without a filename.
+        if file.filename == '':
+            flash('No selected file')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config['/uploads'], filename))
+            return redirect(url_for('download_file', name=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form method=post>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+      <input type=file name=file>
+      <input type=submit value=Upload>
+    </form>
+    '''
+    #return render_template("notifications.html", notifications=notifications)
 
 
-@views.route("/settings", methods=["GET"])
+@views.route("/settings", methods=["GET", "POST"])
 @authed_only
 def settings():
     infos = get_infos()

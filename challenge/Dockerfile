@@ -153,17 +153,6 @@ RUN mkdir /opt/gdb && wget -O - https://ftp.gnu.org/gnu/gdb/gdb-11.1.tar.gz | ta
 
 RUN curl -fsSL https://code-server.dev/install.sh | /bin/sh /dev/stdin --version 4.1.0
 RUN mkdir -p /opt/code-server/extensions && code-server --extensions-dir=/opt/code-server/extensions --install-extension ms-python.python
-#RUN mv /usr/lib/code-server/lib/vscode/node_modules/vscode-ripgrep/bin/rg /usr/lib/code-server/lib/vscode/node_modules/vscode-ripgrep/bin/rg.orig && \
-#    echo '#!/usr/bin/python \n\
-#          \n\
-#          import sys \n\
-#          import os \n\
-#          \n\
-#          sys.argv[0] += ".orig" \n\
-#          if "--follow" in sys.argv: sys.argv.remove("--follow") \n\
-#          os.execv(sys.argv[0], sys.argv)' \
-#    | awk '{$1=$1};1' > /usr/lib/code-server/lib/vscode/node_modules/vscode-ripgrep/bin/rg && \ 
-#	chmod +x /usr/lib/code-server/lib/vscode/node_modules/vscode-ripgrep/bin/rg
 
 RUN git clone https://github.com/aquynh/capstone /opt/capstone && cd /opt/capstone && ./make.sh && ./make.sh install
 RUN git clone --branch=5.1.0 --depth=1 https://github.com/radareorg/radare2 /opt/radare2 && cd /opt/radare2 && sys/install.sh
@@ -171,7 +160,6 @@ RUN git clone https://github.com/aflplusplus/aflplusplus /opt/aflplusplus && cd 
 RUN git clone https://github.com/yrp604/rappel /opt/rappel && cd /opt/rappel && make && cp bin/rappel /usr/bin/rappel
 RUN wget https://github.com/0vercl0k/rp/releases/download/v2.0.2/rp-lin-x64 -O /usr/bin/rp++ && chmod +x /usr/bin/rp++
 
-#RUN pip install git+git://github.com/Gallopsled/pwntools.git
 RUN pip install pwntools jupyter angr r2pipe asteval psutil
 
 RUN git clone https://github.com/pwndbg/pwndbg /opt/pwndbg && cd /opt/pwndbg && ./setup.sh

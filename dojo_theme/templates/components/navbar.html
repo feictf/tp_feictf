@@ -34,28 +34,6 @@
             </span>
           </a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/workspace">
-            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Workspace">
-              <i class="fas fa-terminal d-none d-md-block d-lg-none"></i>
-            </span>
-            <span class="d-sm-block d-md-none d-lg-block">
-              <i class="fas fa-terminal pr-1"></i>Workspace
-            </span>
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="https://pwn.college/discord" target="_blank">
-            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Chat">
-              <i class="fas fa-comments d-none d-md-block d-lg-none"></i>
-            </span>
-            <span class="d-sm-block d-md-none d-lg-block">
-              <i class="fas fa-comments pr-1"></i>Chat
-            </span>
-          </a>
-        </li>
       </ul>
 
       <hr class="d-sm-flex d-md-flex d-lg-none">
@@ -70,6 +48,16 @@
             </span>
             <span class="d-sm-block d-md-none d-lg-block">
               <i class="fas fa-wrench pr-1"></i>Admin Panel
+            </span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('views.notifications') }}">
+            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Add challenges">
+              <i class="fas fa-wrench d-none d-md-block d-lg-none"></i>
+            </span>
+            <span class="d-sm-block d-md-none d-lg-block">
+              <i class="fas fa-plus pr-1"></i>Add challenges
             </span>
           </a>
         </li>
