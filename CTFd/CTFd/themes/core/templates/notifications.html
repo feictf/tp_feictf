@@ -3,14 +3,9 @@
 {% block content %}
 	<div class="jumbotron">
 		<div class="container">
-			<h1>Add challenges</h1>
-			<form action="action_page.php" method="post" enctype="multipart/form-data">
-				<input type="file" name="fileToUpload" id="fileToUpload">
-				<input type="submit" value="Upload Image" name="submit">
-			  </form>
+			<h1>Notifications</h1>
 		</div>
 	</div>
-
 	<div class="container">
 		{% if not notifications %}
 		<h2 class="text-center">There are no notifications yet</h2>

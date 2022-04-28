@@ -1,4 +1,4 @@
-FROM python:3.7-slim-buster
+FROM python:3.9-slim-buster
 WORKDIR /opt/CTFd
 RUN mkdir -p /opt/CTFd /var/log/CTFd /var/uploads
 
@@ -6,7 +6,6 @@ RUN mkdir -p /opt/CTFd /var/log/CTFd /var/uploads
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         build-essential \
-        python3-dev \
         libffi-dev \
         libssl-dev \
         git \
@@ -26,13 +25,14 @@ RUN for d in CTFd/plugins/*; do \
         fi; \
     done;
 
+# hadolint ignore=DL3059
 RUN adduser \
     --disabled-login \
     -u 1001 \
     --gecos "" \
     --shell /bin/bash \
-    ctfd
-RUN chmod +x /opt/CTFd/docker-entrypoint.sh \
+    ctfd \
+    && chmod +x /opt/CTFd/docker-entrypoint.sh \
     && chown -R 1001:1001 /opt/CTFd /var/log/CTFd /var/uploads
 
 USER 1001

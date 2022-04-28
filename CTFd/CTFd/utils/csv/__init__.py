@@ -14,6 +14,9 @@ from CTFd.models import (
     get_class_by_tablename,
 )
 from CTFd.plugins.challenges import get_chal_class
+from CTFd.schemas.challenges import ChallengeSchema
+from CTFd.schemas.teams import TeamSchema
+from CTFd.schemas.users import UserSchema
 from CTFd.utils.config import is_teams_mode, is_users_mode
 from CTFd.utils.scores import get_standings
 
@@ -77,14 +80,12 @@ def dump_scoreboard_csv():
             team_field_values = [
                 team_field_entries.get(f_id, "") for f_id in team_field_ids
             ]
-            team_row = [
-                i + 1,
-                team.name,
-                team.id,
-                standing.score,
-                "",
-                "",
-            ] + team_field_values
+            user_field_values = len(user_field_names) * [""]
+            team_row = (
+                [i + 1, team.name, team.id, standing.score, "", "", "", ""]
+                + user_field_values
+                + team_field_values
+            )
 
             writer.writerow(team_row)
 
@@ -93,16 +94,21 @@ def dump_scoreboard_csv():
                 user_field_values = [
                     user_field_entries.get(f_id, "") for f_id in user_field_ids
                 ]
-                user_row = [
-                    "",
-                    "",
-                    "",
-                    "",
-                    member.name,
-                    member.id,
-                    member.email,
-                    member.score,
-                ] + user_field_values
+                team_field_values = len(team_field_names) * [""]
+                user_row = (
+                    [
+                        "",
+                        "",
+                        "",
+                        "",
+                        member.name,
+                        member.id,
+                        member.email,
+                        member.score,
+                    ]
+                    + user_field_values
+                    + team_field_values
+                )
                 writer.writerow(user_row)
     elif is_users_mode():
         header = ["place", "user", "score"] + user_field_names
@@ -230,23 +236,44 @@ def dump_database_table(tablename):
 
 
 def load_users_csv(dict_reader):
-    for line in dict_reader:
-        result = Users(**line)
-        db.session.add(result)
-        db.session.commit()
+    schema = UserSchema()
+    errors = []
+    for i, line in enumerate(dict_reader):
+        response = schema.load(line)
+        if response.errors:
+            errors.append((i, response.errors))
+        else:
+            db.session.add(response.data)
+            db.session.commit()
+    if errors:
+        return errors
     return True
 
 
 def load_teams_csv(dict_reader):
-    for line in dict_reader:
-        result = Teams(**line)
-        db.session.add(result)
-        db.session.commit()
+    schema = TeamSchema()
+    errors = []
+    for i, line in enumerate(dict_reader):
+        response = schema.load(line)
+        if response.errors:
+            errors.append((i, response.errors))
+        else:
+            db.session.add(response.data)
+            db.session.commit()
+    if errors:
+        return errors
     return True
 
 
 def load_challenges_csv(dict_reader):
-    for line in dict_reader:
+    schema = ChallengeSchema()
+    errors = []
+
+    for i, line in enumerate(dict_reader):
+        # Throw away fields that we can't trust if provided
+        _ = line.pop("id", None)
+        _ = line.pop("requirements", None)
+
         flags = line.pop("flags", None)
         tags = line.pop("tags", None)
         hints = line.pop("hints", None)
@@ -255,6 +282,11 @@ def load_challenges_csv(dict_reader):
         # Load in custom type_data
         type_data = json.loads(line.pop("type_data", "{}") or "{}")
         line.update(type_data)
+
+        response = schema.load(line)
+        if response.errors:
+            errors.append((i + 1, response.errors))
+            continue
 
         ChallengeClass = get_chal_class(challenge_type)
         challenge = ChallengeClass.challenge_model(**line)
@@ -281,6 +313,8 @@ def load_challenges_csv(dict_reader):
                 h = Hints(challenge_id=challenge.id, content=hint,)
                 db.session.add(h)
                 db.session.commit()
+    if errors:
+        return errors
     return True
 
 

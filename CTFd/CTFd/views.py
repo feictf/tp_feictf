@@ -29,7 +29,7 @@ from CTFd.models import (
 from CTFd.utils import config, get_config, set_config
 from CTFd.utils import user as current_user
 from CTFd.utils import validators
-from CTFd.utils.config import is_setup
+from CTFd.utils.config import is_setup, is_teams_mode
 from CTFd.utils.config.pages import build_markdown, get_page
 from CTFd.utils.config.visibility import challenges_visible
 from CTFd.utils.dates import ctf_ended, ctftime, view_after_ctf
@@ -56,7 +56,7 @@ from CTFd.utils.security.signing import (
     unserialize,
 )
 from CTFd.utils.uploads import get_uploader, upload_file
-from CTFd.utils.user import authed, get_current_user, is_admin
+from CTFd.utils.user import authed, get_current_team, get_current_user, is_admin
 
 views = Blueprint("views", __name__)
 
@@ -293,61 +293,14 @@ def integrations():
     else:
         abort(403)
 
-'''
-import os
-from flask import render_template, request, redirect, url_for
-from werkzeug import secure_filename
-uploads_dir = os.path.join(app.instance_path, 'uploads')
-os.makedirs(uploads_dir, exists_ok=True)
-@views.route("/upload_challenge", methods=["GET"])
-def upload_challenge():
-    if request.method == 'POST':
-        profile = request.files['profile']
-        profile.save(os.path.join(uploads_dir, secure_filename(profile.filename)))
-        for file in request.files.getlist('charts'):
-            file.save(os.path.join(uploads_dir, secure_filename(file.name)))
-        #return redirect(url_for('upload'))
-    return ""
-'''
 
-@views.route("/notifications", methods=["GET", "POST"])
+@views.route("/notifications", methods=["GET"])
 def notifications():
-    from flask_wtf.csrf import CSRFProtect
-    app.secret_key = 'example'
-    #To Register CSRF protection globally for the app
-    csrf = CSRFProtect(app)
-    csrf.init_app(app)
-
     notifications = Notifications.query.order_by(Notifications.id.desc()).all()
-    if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['/uploads'], filename))
-            return redirect(url_for('download_file', name=filename))
-    return '''
-    <!doctype html>
-    <title>Upload new File</title>
-    <h1>Upload new File</h1>
-    <form method=post>
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-      <input type=file name=file>
-      <input type=submit value=Upload>
-    </form>
-    '''
-    #return render_template("notifications.html", notifications=notifications)
+    return render_template("notifications.html", notifications=notifications)
 
 
-@views.route("/settings", methods=["GET", "POST"])
+@views.route("/settings", methods=["GET"])
 @authed_only
 def settings():
     infos = get_infos()
@@ -359,6 +312,14 @@ def settings():
     website = user.website
     affiliation = user.affiliation
     country = user.country
+
+    if is_teams_mode() and get_current_team() is None:
+        team_url = url_for("teams.private")
+        infos.append(
+            markup(
+                f'In order to participate you must either <a href="{team_url}">join or create a team</a>.'
+            )
+        )
 
     tokens = UserTokens.query.filter_by(user_id=user.id).all()
 
@@ -448,8 +409,17 @@ def files(path):
                     else:
                         abort(403)
         else:
+            # User cannot view challenges based on challenge visibility
+            # e.g. ctf requires registration but user isn't authed or
+            # ctf requires admin account but user isn't admin
             if not ctftime():
-                abort(403)
+                # It's not CTF time. The only edge case is if the CTF is ended
+                # but we have view_after_ctf enabled
+                if ctf_ended() and view_after_ctf():
+                    pass
+                else:
+                    # In all other situations we should block challenge files
+                    abort(403)
 
             # Allow downloads if a valid token is provided
             token = request.args.get("token", "")
@@ -504,6 +474,26 @@ def themes(theme, path):
     :param theme:
     :param path:
     :return:
+    """
+    for cand_path in (
+        safe_join(app.root_path, "themes", cand_theme, "static", path)
+        # The `theme` value passed in may not be the configured one, e.g. for
+        # admin pages, so we check that first
+        for cand_theme in (theme, *config.ctf_theme_candidates())
+    ):
+        if os.path.isfile(cand_path):
+            return send_file(cand_path)
+    abort(404)
+
+
+@views.route("/themes/<theme>/static/<path:path>")
+def themes_beta(theme, path):
+    """
+    This is a copy of the above themes route used to avoid
+    the current appending of .dev and .min for theme assets.
+
+    In CTFd 4.0 this url_for behavior and this themes_beta
+    route will be removed.
     """
     for cand_path in (
         safe_join(app.root_path, "themes", cand_theme, "static", path)

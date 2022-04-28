@@ -1,3 +1,118 @@
+# UNRELEASED
+
+**General**
+
+- Add a next challenge recommendation to challenges
+- Added size checking and recommendation for images uploaded during setup
+- Add support for only viewing hints after unlocking another hint
+
+**Admin Panel**
+
+- Fix issue where custom field entries for Users and Teams would be misaligned in the scoreboard CSV export
+- Show admins the email server error message when email sending fails
+- Fix minor issue where current theme cannot be found in list of themes
+- Add progress tracking to backup/export importing
+- Make imports happen in the background so that we can see status
+- Add `GET /admin/import` to see status of import
+- Disable the public interface during imports
+- Fix page preview so that it accounts for the provided format
+
+**API**
+
+- Add `count` meta field to the following endpoints:
+  - `/api/v1/users/me/solves`
+  - `/api/v1/users/me/fails`
+  - `/api/v1/users/me/awards`
+  - `/api/v1/teams/me/awards`
+  - `/api/v1/users/[user_id]/solves`
+  - `/api/v1/users/[user_id]/fails`
+  - `/api/v1/users/[user_id]/awards`
+  - `/api/v1/teams/[team_id]/solves`
+  - `/api/v1/teams/[team_id]/awards`
+- Improve speed of `/api/v1/teams/me/fails`
+- Improve speed of `/api/v1/teams/[team_id]/fails`
+- Improve speed of `/api/v1/users/me/fails`
+- Improve speed of `/api/v1/users/[user_id]/fails`
+
+**Deployment**
+
+- Use Python 3.9 as the default Python version
+- Prevent any possible usage of an already existing session ID by checking for duplicates during during ID generation
+- No longer install `python3-dev` in Dockerfile
+- docker-compose.yml now uses `nginx:stable` as the image for nginx
+
+**Themes**
+
+- Create the `core-beta` theme and begin documenting the creation of themes using Vite
+- Add `userName` and `userEmail` to the CTFd init object in `base.html` for easier integration with other JavaScript code
+- Adds the `Assets` constant to access front end assets from Jinja templates
+- Adds a `views.themes_beta` route to avoid the `.dev`/`.min` extension being added automatically to frontend asset urls
+
+**Miscellaneous**
+
+- Fix double logging in `log()` function
+- Add `--delete_import_on_finish` to `python manage.py import_ctf`
+- Fix issue where `field_entries` table could not be imported when moving between MySQL and MariaDB
+
+# 3.4.3 / 2022-03-07
+
+**Security**
+
+- Bump cmarkgfm to 0.8.0 to resolve CVE-2022-24724. Copied entry from 3.4.2 since 3.4.2 introduced a bug that prevented writing raw HTML.
+
+**General**
+
+- Fix issue where raw HTML would not be rendered in markdown
+
+# 3.4.2 / 2022-03-07
+
+**Security**
+
+- Bump cmarkgfm to 0.8.0 to resolve CVE-2022-24724
+
+**General**
+
+- Fix issue where unauthed users couldn't download challenge files after CTF end but viewing after CTF was enabled
+
+# 3.4.1 / 2022-02-19
+
+**General**
+
+- Make session cookies persist in the browser after close
+- Fix issue where all-numeric registration codes wouldn't work
+- Fix issue where a user's session isn't cleared properly after they are deleted by an admin
+- Fix issue where CTF end time couldn't be set during setup
+
+**API**
+
+- Improved speed of the `/api/v1/challenges/[challenge_id]/solves` endpoint
+- Document API authentication and `Content-Type` header requirement
+- Add nested `UserSchema` and `TeamSchema` to `SubmissionSchema` for easier access to account name
+
+**Admin Panel**
+
+- Improve CSV import error reporting and validation
+- Fix non-clickable checkbox label in user creation form in Admin Panel
+- Allow submissions per minute ratelimit to be configurable in Admin Panel
+- Add a link in the Pages Editor to the [Page Variables documentation page](https://docs.ctfd.io/docs/pages/variables/)
+
+**Themes**
+
+- Fix issue where invalid `theme_settings` can cause broken frontend
+- Replace `node-sass` with `sass` and upgrade `sass-loader`
+
+**Deployment**
+
+- Serve all assets from CTFd regardless of internet availability (i.e. fonts and font-awesome)
+- Fix regression in `REVERSE_PROXY` to allow comma seperated integers
+- Bump `flask-restx` to 0.5.1
+- Bump `pybluemonday` to 0.0.9
+- Added support for S3 signature version 4 authentication to support alternative S3 buckets (Google Cloud Storage, DigitalOcean Spaces, etc)
+
+**Miscellaneous**
+
+- Add a Github Actions job to publish Docker images to Dockerhub and ghcr
+
 # 3.4.0 / 2021-08-11
 
 **General**
