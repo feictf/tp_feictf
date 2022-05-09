@@ -11,7 +11,7 @@ body, table, .form-control:focus, .close {
 }
 
 .navbar-brand, .nav-link, h1, h2 {
-    color: #b5e853 !important;
+    color: #5a89f7 !important;
 }
 
 a {
@@ -20,7 +20,7 @@ a {
 }
 
 nav {
-    border-bottom: 1px dashed #b5e853;
+    border-bottom: 1px dashed #5a89f7;
 }
 
 .modal-dialog {
@@ -28,20 +28,22 @@ nav {
 }
 
 .modal-content {
-    border: 1px dashed #b5e853;
+    border: 1px dashed #5a89f7;
 }
 
 .navbar-brand, .nav-link, body, p, h1, h2, h3, h4, td {
-    font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !important;
+    /* font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal, monospace !important; */
+    font-family: 'Exo', sans-serif;
 }
 
 .navbar-brand {
     font-weight: bold;
     text-shadow: 0 1px 1px rgba(0,0,0,0.1),0 0 5px rgba(181,232,83,0.1),0 0 10px rgba(181,232,83,0.1);
+    padding-left: 15px;
 }
 
 .navbar-brand::before {
-    content: "./"
+    /* content: "./" */
 }
 
 .nav-tabs {
@@ -54,6 +56,10 @@ nav {
 
 .nav-link:hover:not(.active) {
     border-color: #6c757d !important;
+}
+
+.nav-link i {
+    color: #ffff;
 }
 
 .challenge-button {
@@ -85,4 +91,15 @@ nav {
     margin: auto;
     width: 128px;
     border-radius: 50%;
+}
+
+#stu-fei-logo {
+    height: 35px;
+    border-right-style: solid;
+    padding-right: 15px;
+}
+
+#link-fei {
+    text-decoration: none;
+    color: #ffff;
 }
