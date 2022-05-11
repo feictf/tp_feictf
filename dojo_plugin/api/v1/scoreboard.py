@@ -126,7 +126,7 @@ class ScoreboardCategory(Resource):
         user = get_current_user()
         dojo_id = active_dojo_id(user.id) if user else None
 
-        category_filter = Solves.type
+        category_filter = Solves.challenge == 'test'
         standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
 
         page_standings = list((i + 1, standing) for i, standing in enumerate(standings))

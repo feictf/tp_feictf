@@ -42,10 +42,6 @@ nav {
     padding-left: 15px;
 }
 
-.navbar-brand::before {
-    /* content: "./" */
-}
-
 .nav-tabs {
     border-bottom: 1px solid #6c757d;
 }

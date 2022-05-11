@@ -68,63 +68,6 @@
     </p>
   </div>
 
-
-  <div class="center-content">
-    <div class="col-md-8">
-      <div id="solves-graph" class="d-flex align-items-center">
-        <div class="text-center w-100">
-          <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
-        </div>
-      </div>
-    </div>
-
-
-    <div class="row">
-      <div class="col-md-12">
-        <div id="score-distribution-graph" class="d-flex align-items-center">
-          <div class="text-center w-100">
-            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <hr>
-
-    <div class="row">
-      <div class="col-md-12">
-        <div id="solve-percentages-graph" class="d-flex align-items-center">
-          <div class="text-center w-100">
-            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <br>
-
-  <h2 class="row">Weekly Top 10</h2>
-
-  <div class="scoreboard row">
-    <div class="col-md-12 p-0">
-      <table class="table table-striped">
-  <thead>
-    <tr>
-      <td scope="col" class="col-md-1"><b>Rank</b></td>
-            <td scope="col" class="col-md-1"></td>
-      <td scope="col" class="col-md-8"><b>Hacker</b></td>
-      <td scope="col" class="col-md-1"></td>
-      <td scope="col" class="col-md-1"><b>Score</b></td>
-    </tr>
-  </thead>
-  <tbody id="scoreboard-weekly">
-  </tbody>
-      </table>
-    </div>
-  </div>
-
   <br>
 
   <h2 class="row">All Time Rankings</h2>
@@ -173,6 +116,9 @@
     </div>
   </div>
 
+  <div id="score-graph"></div>
+  <div id="scoreboard"></div>
+
 </div>
 {% endblock %}
 
@@ -191,10 +137,18 @@
 <script defer src="{{ url_for('views.themes', path='../static/js/dojo/echarts.bundle.min.js') }}"></script>
 <script defer src="{{ url_for('views.themes', path='../static/js/dojo/graphs.min.js') }}"></script> -->
 
-<script defer src="vendor.bundle.min.js"></script>
+<!-- <script defer src="vendor.bundle.min.js"></script>
 <script defer src="../static/js/dojo/core.min.js"></script>
 <script defer src="../static/js/dojo/components.min.js"></script>
-<script defer src="../static/js/dojo/scoreboard.min.js"></script>
-<script defer src="../static/js/dojo/echarts.bundle.min.js"></script>
+<script defer src="../static/js/dojo/scoreboard.min.js"></script> -->
+<!-- <script defer src="../static/js/dojo/echarts.bundle.min.js"></script>
 <script defer src="../static/js/dojo/graphs.min.js"></script>
-<script defer src="../static/js/dojo/statistics.min.js"></script>
+<script defer src="../static/js/dojo/statistics.min.js"></script> -->
+<!-- <script defer src="../../CTFd/CTFd/themes/core/assets/js/pages/scoreboard.js"></script> -->
+
+<!-- <script defer src="../static/js/dojo/scoreboard.js"></script> -->
+
+{% block scripts %}
+<script defer src="{{ url_for('views.themes', path='js/dojo/scoreboard.js') }}"></script>
+{% endblock %}
+
