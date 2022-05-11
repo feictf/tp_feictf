@@ -9,7 +9,12 @@
     <link rel="stylesheet" href="{{ url_for('views.themes', path='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('views.themes', path='css/core.css') }}">
     <link rel="stylesheet" href="{{ url_for('views.themes', path='css/custom.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Exo&display=swap" rel="stylesheet">
     {% block stylesheets %}
+    <style>
+    </style>
     {% endblock %}
 
     {{ Plugins.styles }}
@@ -37,7 +42,7 @@
     <footer class="footer">
       <div class="container text-center">
 	<a href="https://ctfd.io" class="text-secondary">
-	  <small class="text-muted">Powered by CTFd</small>
+	  <small class="text-muted">Powered by CTFD</small>
 	</a>
       </div>
     </footer>

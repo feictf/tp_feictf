@@ -103,3 +103,21 @@ nav {
     text-decoration: none;
     color: #ffff;
 }
+
+.mr-10 {
+    margin-left: 10px;
+}
+
+.ml-10 {
+    margin-right: 10px;
+}
+
+.urls {
+    display: flex;
+}
+
+.center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

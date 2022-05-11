@@ -42,14 +42,19 @@
 
 {% block content %}
 <div class="jumbotron">
-  <div class="container">
-    <h1>Scoreboard</h1>
+  <div class="container center-content">
+    <h1>I - BISPP</h1>
+    <div class="urls">
+      <h5><a href="https://uim.fei.stuba.sk/predmet/i-bispp/">Webstránka</a></h5>
+      <span class="mr-10 ml-10">|</span>
+      <h5><a href="https://is.stuba.sk/auth/katalog/syllabus.pl?predmet=353772">Sylabus</a></h5>
+    </div>
   </div>
 </div>
 <div class="container">
   {% include "components/errors.html" %}
 
-  <h2 class="row">Dojo Stats</h2>
+  <h2 class="row">Stats</h2>
 
   <div class="row">
     <p>
@@ -63,6 +68,41 @@
     </p>
   </div>
 
+
+  <div class="center-content">
+    <div class="col-md-8">
+      <div id="solves-graph" class="d-flex align-items-center">
+        <div class="text-center w-100">
+          <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="score-distribution-graph" class="d-flex align-items-center">
+          <div class="text-center w-100">
+            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div id="solve-percentages-graph" class="d-flex align-items-center">
+          <div class="text-center w-100">
+            <i class="fas fa-circle-notch fa-spin fa-3x fa-fw spinner"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
   <br>
 
   <h2 class="row">Weekly Top 10</h2>
@@ -70,17 +110,17 @@
   <div class="scoreboard row">
     <div class="col-md-12 p-0">
       <table class="table table-striped">
-	<thead>
-	  <tr>
-	    <td scope="col" class="col-md-1"><b>Rank</b></td>
+  <thead>
+    <tr>
+      <td scope="col" class="col-md-1"><b>Rank</b></td>
             <td scope="col" class="col-md-1"></td>
-	    <td scope="col" class="col-md-8"><b>Hacker</b></td>
-	    <td scope="col" class="col-md-1"></td>
-	    <td scope="col" class="col-md-1"><b>Score</b></td>
-	  </tr>
-	</thead>
-	<tbody id="scoreboard-weekly">
-	</tbody>
+      <td scope="col" class="col-md-8"><b>Hacker</b></td>
+      <td scope="col" class="col-md-1"></td>
+      <td scope="col" class="col-md-1"><b>Score</b></td>
+    </tr>
+  </thead>
+  <tbody id="scoreboard-weekly">
+  </tbody>
       </table>
     </div>
   </div>
@@ -92,17 +132,17 @@
   <div class="scoreboard row">
     <div class="col-md-12 p-0">
       <table class="table table-striped">
-	<thead>
-	  <tr>
-	    <td scope="col" class="col-md-1"><b>Rank</b></td>
+  <thead>
+    <tr>
+      <td scope="col" class="col-md-1"><b>Rank</b></td>
             <td scope="col" class="col-md-1"></td>
-	    <td scope="col" class="col-md-8"><b>Hacker</b></td>
-	    <td scope="col" class="col-md-1"></td>
-	    <td scope="col" class="col-md-1"><b>Score</b></td>
-	  </tr>
-	</thead>
-	<tbody id="scoreboard-overall">
-	</tbody>
+      <td scope="col" class="col-md-8"><b>Hacker</b></td>
+      <td scope="col" class="col-md-1"></td>
+      <td scope="col" class="col-md-1"><b>Score</b></td>
+    </tr>
+  </thead>
+  <tbody id="scoreboard-overall">
+  </tbody>
       </table>
     </div>
     <div>
@@ -111,9 +151,50 @@
     </div>
   </div>
 
+  <br>
+
+  <h2 class="row">Top Category</h2>
+
+  <div class="scoreboard row">
+    <div class="col-md-12 p-0">
+      <table class="table table-striped">
+  <thead>
+    <tr>
+      <td scope="col" class="col-md-1"><b>Rank</b></td>
+            <td scope="col" class="col-md-1"></td>
+      <td scope="col" class="col-md-8"><b>Hacker</b></td>
+      <td scope="col" class="col-md-1"></td>
+      <td scope="col" class="col-md-1"><b>Score</b></td>
+    </tr>
+  </thead>
+  <tbody id="scoreboard-topCategory">
+  </tbody>
+      </table>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
 
-{% block scripts %}
+<!-- {% block scripts %}
+<script defer src="{{ url_for('views.themes', theme='admin', path='js/vendor.bundle.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', theme='admin', path='js/components.min.js') }}"></script>
 <script defer src="{{ url_for('views.themes', path='js/dojo/scoreboard.js') }}"></script>
-{% endblock %}
+<script defer src="{{ url_for('views.themes', theme='admin', path='js/graphs.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', theme='admin', path='js/echarts.bundle.min.js') }}"></script>
+{% endblock %} -->
+
+<!-- <script defer src="{{ url_for('views.themes', path='vendor.bundle.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', path='../static/js/dojo/core.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', path='../static/js/dojo/components.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', path='../static/js/dojo/statistics.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', path='../static/js/dojo/echarts.bundle.min.js') }}"></script>
+<script defer src="{{ url_for('views.themes', path='../static/js/dojo/graphs.min.js') }}"></script> -->
+
+<script defer src="vendor.bundle.min.js"></script>
+<script defer src="../static/js/dojo/core.min.js"></script>
+<script defer src="../static/js/dojo/components.min.js"></script>
+<script defer src="../static/js/dojo/scoreboard.min.js"></script>
+<script defer src="../static/js/dojo/echarts.bundle.min.js"></script>
+<script defer src="../static/js/dojo/graphs.min.js"></script>
+<script defer src="../static/js/dojo/statistics.min.js"></script>

@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-  <div class="container">
+  <div class="container">    
+    <a href="https://www.fei.stuba.sk/" id="link-fei"><img src="https://i.postimg.cc/Gh0h9Gmj/fei-800.png" id="stu-fei-logo"></a>
     <a href="{{ url_for('views.static_html', route='/') }}" class="navbar-brand">
       {% if Configs.ctf_logo %}
       <img class="img-responsive ctf_logo" src="{{ url_for('views.files', path=Configs.ctf_logo) }}" height="25" alt="{{ Configs.ctf_name }}">
@@ -24,7 +25,7 @@
           </a>
         </li>
 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="{{ url_for('scoreboard.listing') }}">
             <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Scoreboard">
               <i class="fas fa-chart-line d-none d-md-block d-lg-none"></i>
@@ -33,7 +34,7 @@
               <i class="fas fa-chart-line pr-1"></i>Scoreboard
             </span>
           </a>
-        </li>
+        </li> -->
       </ul>
 
       <hr class="d-sm-flex d-md-flex d-lg-none">

@@ -19,7 +19,7 @@ from CTFd.utils.modes import get_model
 from .models import PrivateDojos, PrivateDojoMembers, PrivateDojoActives
 
 
-CHALLENGES_DIR = pathlib.Path("/data/challenges")
+CHALLENGES_DIR = pathlib.Path("/var/challenges")
 PLUGIN_DIR = pathlib.Path(__file__).parent
 SECCOMP = (PLUGIN_DIR / "seccomp.json").read_text()
 

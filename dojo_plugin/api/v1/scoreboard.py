@@ -118,3 +118,20 @@ class ScoreboardWeekly(Resource):
             "page_standings": [standing_info(place, standing) for place, standing in page_standings],
         }
         return result
+
+
+@scoreboard_namespace.route("/topCategory")
+class ScoreboardCategory(Resource):
+    def get(self):
+        user = get_current_user()
+        dojo_id = active_dojo_id(user.id) if user else None
+
+        category_filter = Solves.type
+        standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
+
+        page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
+
+        result = {
+            "page_standings": [standing_info(place, standing) for place, standing in page_standings],
+        }
+        return result

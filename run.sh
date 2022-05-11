@@ -26,5 +26,5 @@ docker run \
 
 
 
-#docker exec pwn.college logs 
+#docker exec pwn.college bash
 docker exec -it pwn.college bash -c "sleep 16; docker exec -it ctfd_proxy bash -c 'sed -i \"53,59d\" /etc/nginx/conf.d/default.conf; sleep 5; service nginx restart'"
