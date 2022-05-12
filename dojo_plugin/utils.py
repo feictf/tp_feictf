@@ -110,7 +110,7 @@ def user_dojos(user_id):
 
 
 def active_dojo_id(user_id):
-    active = PrivateDojoActives.query.filter_by(user_id=user.team_id).first()
+    active = PrivateDojoActives.query.filter_by(user_id=user_id).first()
     if not active:
         return None
     return active.dojo_id
@@ -143,7 +143,7 @@ def dojo_standings(dojo_id=None, fields=None):
         ))
         private_dojo_filters.append(challenges_filter)
 
-        members = db.session.query(PrivateDojoMembers.team_id).filter_by(dojo_id=dojo_id)
+        members = db.session.query(PrivateDojoMembers.user_id).filter_by(dojo_id=dojo_id)
         private_dojo_filters.append(Solves.account_id.in_(members.subquery()))
 
     standings_query = (
