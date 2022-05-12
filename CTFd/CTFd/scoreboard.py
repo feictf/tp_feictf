@@ -10,7 +10,7 @@ from CTFd.utils.user import is_admin
 scoreboard = Blueprint("scoreboard", __name__)
 
 
-@scoreboard.route("/")
+@scoreboard.route("/scoreboard")
 @check_score_visibility
 def listing():
     infos = get_infos()

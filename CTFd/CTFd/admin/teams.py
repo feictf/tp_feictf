@@ -7,7 +7,7 @@ from CTFd.utils.decorators import admins_only
 
 
 @admin.route("/admin/teams")
-@admins_only
+# @admins_only
 def teams_listing():
     q = request.args.get("q")
     field = request.args.get("field")

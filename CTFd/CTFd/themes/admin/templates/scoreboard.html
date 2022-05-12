@@ -43,7 +43,7 @@
 			<div class="tab-content">
 				<div class="tab-pane fade show active" id="standings" role="tabpanel">
 					{% include "admin/scoreboard/standings.html" %}
-				</div>
+				</div>w
 				{% if Configs.user_mode == UserModeTypes.TEAMS %}
 				<div class="tab-pane fade" id="user-standings" role="tabpanel">
 					{% include "admin/scoreboard/users.html" %}
@@ -61,3 +61,5 @@
 {% block entrypoint %}
 	<script defer src="{{ url_for('views.themes', theme='admin', path='js/pages/scoreboard.js') }}"></script>
 {% endblock %}
+
+
