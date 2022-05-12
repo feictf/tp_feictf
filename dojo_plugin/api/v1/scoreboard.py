@@ -6,7 +6,7 @@ from flask import url_for
 from flask_restx import Namespace, Resource
 from CTFd.cache import cache
 from CTFd.models import db, Solves, Challenges
-from CTFd.utils.user import get_current_user
+from CTFd.utils.user import get_current_user, get_current_team
 from CTFd.utils.modes import get_model, generate_account_url
 
 from ...utils import active_dojo_id, dojo_standings
@@ -80,6 +80,7 @@ scoreboard_namespace = Namespace("scoreboard")
 class ScoreboardOverall(Resource):
     def get(self, page):
         user = get_current_user()
+        team = get_current_team()
         dojo_id = active_dojo_id(user.id) if user else None
 
         standings = get_standings(dojo_id=dojo_id)
@@ -120,18 +121,18 @@ class ScoreboardWeekly(Resource):
         return result
 
 
-@scoreboard_namespace.route("/topCategory")
-class ScoreboardCategory(Resource):
-    def get(self):
-        user = get_current_user()
-        dojo_id = active_dojo_id(user.id) if user else None
+# @scoreboard_namespace.route("/topCategory")
+# class ScoreboardCategory(Resource):
+#     def get(self):
+#         user = get_current_user()
+#         dojo_id = active_dojo_id(user.id) if user else None
 
-        category_filter = Solves.challenge == 'test'
-        standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
+#         category_filter = Solves.challenge == 'test'
+#         standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
 
-        page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
+#         page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
 
-        result = {
-            "page_standings": [standing_info(place, standing) for place, standing in page_standings],
-        }
-        return result
+#         result = {
+#             "page_standings": [standing_info(place, standing) for place, standing in page_standings],
+#         }
+#         return result

@@ -13,17 +13,3 @@ homepage = Blueprint("homepage", __name__)
 @homepage.route("/")
 def listing():
     return render_template("homepage.html")
-
-# @main_page.route("/main_page")
-# @check_score_visibility
-# def listing():
-#     infos = get_infos()
-
-#     if config.is_main_page_frozen():
-#         infos.append("main_page has been frozen")
-
-#     if is_admin() is True and scores_visible() is False:
-#         infos.append("Scores are not currently visible to users")
-
-#     standings = get_standings()
-#     return render_template("main_page.html", standings=standings, infos=infos)

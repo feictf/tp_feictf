@@ -22,6 +22,7 @@ class PrivateDojoMembers(db.Model):
     __tablename__ = "private_dojo_members"
     dojo_id = db.Column(db.Integer, db.ForeignKey("private_dojos.id", ondelete="CASCADE"), primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("users.id", ondelete="CASCADE"), primary_key=True)
+    team_id = db.Column(db.Integer, db.ForeignKey("team.id", ondelete="CASCADE"), primary_key=True)
 
 
 class PrivateDojoActives(db.Model):
