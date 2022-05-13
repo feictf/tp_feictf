@@ -126,8 +126,9 @@ class BaseChallenge(object):
                     return True, "Correct"
             except FlagException as e:
                 return False, str(e)
-        return True, "Correct"
-        #return False, "Incorrect"
+        # test case, ked chceme dat vsetky flags na true
+        #return True, "Correct"
+        return False, "Incorrect"
 
     @classmethod
     def solve(cls, user, team, challenge, request):

@@ -14,7 +14,6 @@ scoreboard = Blueprint("scoreboard", __name__)
 @check_score_visibility
 def listing():
     infos = get_infos()
-
     if config.is_scoreboard_frozen():
         infos.append("Scoreboard has been frozen")
 

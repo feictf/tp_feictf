@@ -42,11 +42,11 @@ class DojoFlag(BaseFlag):
         except BadSignature:
             return False
 
-        if account_id != current_account_id:
-            raise FlagException("This flag is not yours!")
+        #if account_id != current_account_id:
+        #    raise FlagException("This flag is not yours!")
 
-        if challenge_id != current_challenge_id:
-            raise FlagException("This flag is not for this challenge!")
+        #if challenge_id != current_challenge_id:
+        #    raise FlagException("This flag is not for this challenge!")
 
         try:
             maybe_award_belt(current_account_id, ignore_challenge_id=current_challenge_id)

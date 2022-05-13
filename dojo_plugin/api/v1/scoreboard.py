@@ -62,14 +62,14 @@ def get_standings(count=None, filters=None, *, dojo_id=None):
 
 
 def standing_info(place, standing):
-    belts = get_belts()["users"]
+    # belts = get_belts()["users"]
     return {
         "place": place,
         "name": standing.name,
         "score": int(standing.score),
         "url": generate_account_url(standing.account_id),
-        "symbol": email_group_asset(standing.email),
-        "belt": belt_asset(belts.get(standing.account_id, {}).get("color")),
+        "symbol": url_for("views.themes", path=f"img/dojo/hacker.png"),
+        # "belt": belt_asset(belts.get(standing.account_id, {}).get("color")),
     }
 
 

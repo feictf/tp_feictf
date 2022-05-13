@@ -7,6 +7,7 @@ from .v1.scoreboard import scoreboard_namespace
 from .v1.ssh_key import ssh_key_namespace
 from .v1.private_dojo import private_dojo_namespace
 from .v1.belts import belts_namespace
+from .v1.download import download_namespace
 
 
 api = Blueprint("pwncollege_api", __name__)
@@ -18,3 +19,4 @@ api_v1.add_namespace(scoreboard_namespace, "/scoreboard")
 api_v1.add_namespace(ssh_key_namespace, "/ssh_key")
 api_v1.add_namespace(private_dojo_namespace, "/private_dojo")
 api_v1.add_namespace(belts_namespace, "/belts")
+#api_v1.add_namespace(download_namespace, "/download")

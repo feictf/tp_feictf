@@ -364,7 +364,7 @@ def static_html(route):
         if page.auth_required and authed() is False:
             return redirect(url_for("auth.login", next=request.full_path))
 
-        return render_template("page.html", content=page.html, title=page.title)
+        return render_template("homepage.html", content=page.html, title=page.title)
 
 
 @views.route("/tos")

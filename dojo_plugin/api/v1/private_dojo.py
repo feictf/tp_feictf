@@ -140,6 +140,8 @@ class ActivateDojo(Resource):
         return {"success": True}
 
 
+
+
 @private_dojo_namespace.route("/solves")
 class DojoSolves(Resource):
     @authed_only

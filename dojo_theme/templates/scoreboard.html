@@ -90,6 +90,28 @@
   </div>
 
   {% include "core/user_scoreboard_graph.html" %}
+
+  <div class="scoreboard row">
+    <div class="col-md-12 p-0">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <td scope="col" class="col-md-1"><b>Rank</b></td>
+            <td scope="col" class="col-md-1"></td>
+            <td scope="col" class="col-md-8"><b>Category</b></td>
+            <td scope="col" class="col-md-1"></td>
+            <td scope="col" class="col-md-1"><b>Score</b></td>
+          </tr>
+        </thead>
+        <tbody id="top-category">
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <ul id="scoreboard-overall-pages" class="p-0">
+      </ul>
+    </div>
+  </div>
   
   </div>
   {% endblock %}

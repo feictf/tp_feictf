@@ -1,5 +1,7 @@
 #!/bin/sh
 
+echo "ahoj kubo"
+
 DIR="$(readlink -f $(dirname $0))"
 
 if [ ! -f "$DIR/data/config.env" ] && [ -z "$SETUP_HOSTNAME" ]; then
@@ -7,9 +9,8 @@ if [ ! -f "$DIR/data/config.env" ] && [ -z "$SETUP_HOSTNAME" ]; then
     exit 1
 fi
 
-docker build -t pwn.college .
-
 docker kill pwn.college
+docker build -t pwn.college .
 
 docker run \
        --privileged \
@@ -24,7 +25,5 @@ docker run \
        --name pwn.college \
        pwn.college
 
-
-
 #docker exec pwn.college bash
-docker exec -it pwn.college bash -c "sleep 16; docker exec -it ctfd_proxy bash -c 'sed -i \"53,59d\" /etc/nginx/conf.d/default.conf; sleep 5; service nginx restart'"
+docker exec -it pwn.college bash -c "sleep 18; docker exec -it ctfd_proxy bash -c 'sed -i \"53,59d\" /etc/nginx/conf.d/default.conf; sleep 4; service nginx restart'"
