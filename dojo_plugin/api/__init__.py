@@ -19,4 +19,5 @@ api_v1.add_namespace(scoreboard_namespace, "/scoreboard")
 api_v1.add_namespace(ssh_key_namespace, "/ssh_key")
 api_v1.add_namespace(private_dojo_namespace, "/private_dojo")
 api_v1.add_namespace(belts_namespace, "/belts")
-#api_v1.add_namespace(download_namespace, "/download")
+api_v1.add_namespace(download_namespace, "/download")
+

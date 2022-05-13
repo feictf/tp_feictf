@@ -1,6 +1,6 @@
 #!/bin/sh
 
-echo "ahoj kubo"
+echo "ahoj kubo -> cau palo"
 
 DIR="$(readlink -f $(dirname $0))"
 

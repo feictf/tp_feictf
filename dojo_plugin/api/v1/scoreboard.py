@@ -111,6 +111,7 @@ class ScoreboardWeekly(Resource):
         dojo_id = active_dojo_id(user.id) if user else None
 
         week_filter = Solves.date > (datetime.datetime.utcnow() - datetime.timedelta(days=7))
+
         standings = get_standings(count=10, filters=[week_filter], dojo_id=dojo_id)
 
         page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
@@ -120,19 +121,21 @@ class ScoreboardWeekly(Resource):
         }
         return result
 
+# TODO: vyfiltrovat top category, ked returnujem len string, :ide, tj. treba dokoncit tu vnutornu logiku kde sa z DB
+# filtruju top category
+@scoreboard_namespace.route("/topCategory")
+class ScoreboardCategory(Resource):
+    def get(self):
+        user = get_current_user()
+        dojo_id = active_dojo_id(user.id) if user else None
 
-# @scoreboard_namespace.route("/topCategory")
-# class ScoreboardCategory(Resource):
-#     def get(self):
-#         user = get_current_user()
-#         dojo_id = active_dojo_id(user.id) if user else None
+        category_filter = Solves.challenge_id.category
+        return category_filter
+        standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
 
-#         category_filter = Solves.challenge == 'test'
-#         standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
+        page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
 
-#         page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
-
-#         result = {
-#             "page_standings": [standing_info(place, standing) for place, standing in page_standings],
-#         }
-#         return result
+        result = {
+            "page_standings": [standing_info(place, standing) for place, standing in page_standings],
+        }
+        return result

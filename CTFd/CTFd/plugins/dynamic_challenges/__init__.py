@@ -10,6 +10,8 @@ from CTFd.plugins.challenges import CHALLENGE_CLASSES, BaseChallenge
 from CTFd.plugins.migrations import upgrade
 from CTFd.utils.modes import get_model
 
+from CTFd.utils.user import get_current_user
+
 
 class DynamicChallenge(Challenges):
     __mapper_args__ = {"polymorphic_identity": "dynamic"}
@@ -52,6 +54,10 @@ class DynamicValueChallenge(BaseChallenge):
     @classmethod
     def calculate_value(cls, challenge):
         Model = get_model()
+
+        current_account_id = get_current_user().account_id
+        print(current_account_id)
+        print(account_id)
 
         solve_count = (
             Solves.query.join(Model, Solves.account_id == Model.id)

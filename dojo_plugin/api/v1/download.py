@@ -1,11 +1,11 @@
 from flask import url_for
 from flask import send_from_directory
-from flask_restx import Namespace
+from flask_restx import Namespace, Resource
 
 download_namespace = Namespace("download")
 
-@download_namespace.route("/")
-def download():
-    # uploads = os.path.join(current_app.root_path, app.config['UPLOAD_FOLDER'])
-    # send_from_directory(directory="/", filename="docker.py")
-    return "<h1>PICE TAM</h1>"
+@download_namespace.route("")
+class downloadBinary(Resource):
+    def get(self):
+        return "<h1>PICE TAM</h1>"
+    
