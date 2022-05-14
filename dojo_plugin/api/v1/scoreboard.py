@@ -9,7 +9,7 @@ from CTFd.models import db, Solves, Challenges
 from CTFd.utils.user import get_current_user, get_current_team
 from CTFd.utils.modes import get_model, generate_account_url
 
-from ...utils import active_dojo_id, dojo_standings
+from ...utils import active_dojo_id, dojo_standings, dojo_standings_categories
 from .belts import get_belts
 
 
@@ -73,6 +73,32 @@ def standing_info(place, standing):
     }
 
 
+def get_standings_categories(count=None, filters=None, category=None, *, dojo_id=None):
+    if filters is None:
+        filters = []
+
+    Model = get_model()
+    score = db.func.sum(Challenges.value).label("score")
+    fields = [
+        Solves.account_id,
+        Model.name,
+        Model.email,
+        score
+    ]
+    standings_query = (
+        dojo_standings_categories(dojo_id, fields, category)
+        .filter(*filters)
+        .group_by(Solves.account_id)
+        .order_by(score.desc(), db.func.max(Solves.id))
+    )
+
+    if count is None:
+        standings = standings_query.all()
+    else:
+        standings = standings_query.limit(count).all()
+
+    return standings
+
 scoreboard_namespace = Namespace("scoreboard")
 
 
@@ -123,15 +149,13 @@ class ScoreboardWeekly(Resource):
 
 # TODO: vyfiltrovat top category, ked returnujem len string, :ide, tj. treba dokoncit tu vnutornu logiku kde sa z DB
 # filtruju top category
-@scoreboard_namespace.route("/topCategory")
+@scoreboard_namespace.route("/topCategory/<string:category>")
 class ScoreboardCategory(Resource):
-    def get(self):
+    def get(self, category):
         user = get_current_user()
         dojo_id = active_dojo_id(user.id) if user else None
 
-        category_filter = Solves.challenge_id.category
-        return category_filter
-        standings = get_standings(count=10, filters=[category_filter], dojo_id=dojo_id)
+        standings = get_standings_categories(category=category, dojo_id=dojo_id)
 
         page_standings = list((i + 1, standing) for i, standing in enumerate(standings))
 

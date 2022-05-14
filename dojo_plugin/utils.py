@@ -156,6 +156,37 @@ def dojo_standings(dojo_id=None, fields=None):
 
     return standings_query
 
+def dojo_standings_categories(dojo_id=None, fields=None, category=None):
+    if fields is None:
+        fields = []
+
+    Model = get_model()
+
+    private_dojo_filters = []
+    if dojo_id is not None:
+        modules = dojo_modules(dojo_id)
+        challenges_filter = or_(*(
+            and_(Challenges.category == module_challenge["category"],
+                 Challenges.name.in_(module_challenge["names"]))
+            if module_challenge.get("names") else
+            Challenges.category == module_challenge["category"]
+            for module in modules
+            for module_challenge in module.get("challenges", [])
+        ))
+        private_dojo_filters.append(challenges_filter)
+
+        members = db.session.query(PrivateDojoMembers.user_id).filter_by(dojo_id=dojo_id)
+        private_dojo_filters.append(Solves.account_id.in_(members.subquery()))
+
+    standings_query = (
+        db.session.query(*fields)
+        .join(Challenges)
+        .join(Model, Model.id == Solves.account_id)
+        .filter(Challenges.value != 0, Model.banned == False, Model.hidden == False,
+                Challenges.category == category)
+    )
+
+    return standings_query
 
 def validate_dojo_data(data):
     try:

@@ -75,4 +75,4 @@ def challenges_detail(challenge_id):
 @admins_only
 def challenges_new():
     types = CHALLENGE_CLASSES.keys()
-    return render_template("admin/challenges/new.html", types=types)
+    return render_template("admin/challenges/create.html", types=types)

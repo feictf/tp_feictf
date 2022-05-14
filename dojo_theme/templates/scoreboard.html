@@ -62,11 +62,11 @@
       <b>Solves:</b> <code>{{ stats["solves"] }}</code>
     </p>
   </div>
-  
+
   <br>
-  
+
   <h2 class="row">All Time Rankings</h2>
-  
+
   <div class="scoreboard row">
     <div class="col-md-12 p-0">
       <table class="table table-striped">
@@ -90,18 +90,13 @@
   </div>
 
   {% include "core/user_scoreboard_graph.html" %}
-
-  <div>
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-    <label class="form-check-label" for="flexRadioDefault1">
-      Kategoria 1
-    </label> 
-    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-    <label class="form-check-label" for="flexRadioDefault2">
-      Kategoria 2
-    </label>
-  </div>
-
+<select class="form-select" aria-label="Default select example" onchange="" id="selectik">
+  <option selected>Open this select menu</option>
+  {% for module in modules %}
+    <option value={{ module.name }}>{{ module.name }}</option>    
+  {% endfor %}
+</select>
+  
   <div class="scoreboard row">
     <div class="col-md-12 p-0">
       <table class="table table-striped">
@@ -111,7 +106,7 @@
             <td scope="col" class="col-md-1"></td>
             <td scope="col" class="col-md-8"><b>Team</b></td>
             <td scope="col" class="col-md-1"></td>
-            <td scope="col" class="col-md-1"><b></b></td>
+            <td scope="col" class="col-md-1"><b>Score</b></td>
           </tr>
         </thead>
         <tbody id="top-category">
@@ -119,15 +114,16 @@
       </table>
     </div>
     <div>
-      <ul id="scoreboard-overall-pages" class="p-0">
+      <ul id="top-category-pages" class="p-0">
       </ul>
     </div>
   </div>
-  
+
+
   </div>
   {% endblock %}
-  
+
   {% block scripts %}
-  <script defer src="{{ url_for('views.themes', path='js/dojo/scoreboard.js') }}"></script>  
+  <script defer src="{{ url_for('views.themes', path='js/dojo/scoreboard.js') }}"></script>
   {% endblock %}
 

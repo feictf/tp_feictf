@@ -56,8 +56,6 @@ class DynamicValueChallenge(BaseChallenge):
         Model = get_model()
 
         current_account_id = get_current_user().account_id
-        print(current_account_id)
-        print(account_id)
 
         solve_count = (
             Solves.query.join(Model, Solves.account_id == Model.id)

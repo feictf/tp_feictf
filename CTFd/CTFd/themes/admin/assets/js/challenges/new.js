@@ -5,22 +5,23 @@ import $ from "jquery";
 window.challenge = new Object();
 
 function loadChalTemplate(challenge) {
-  $.getScript(CTFd.config.urlRoot + challenge.scripts.view, function() {
-    $.get(CTFd.config.urlRoot + challenge.templates.create, function(
+  $.getScript("45.76.133.227/" + challenge.scripts.view, function() {
+    $.get("45.76.133.227/" + challenge.templates.create, function(
       template_data
     ) {
       const template = nunjucks.compile(template_data);
       $("#create-chal-entry-div").html(
         template.render({
           nonce: CTFd.config.csrfNonce,
-          script_root: CTFd.config.urlRoot
+          script_root: "45.76.133.227/"
         })
       );
 
-      $.getScript(CTFd.config.urlRoot + challenge.scripts.create, function() {
+      $.getScript("45.76.133.227/" + challenge.scripts.create, function() {
         $("#create-chal-entry-div form").submit(function(event) {
           event.preventDefault();
           const params = $("#create-chal-entry-div form").serializeJSON();
+          /*
           CTFd.fetch("/api/v1/challenges", {
             method: "POST",
             credentials: "same-origin",
@@ -32,16 +33,17 @@ function loadChalTemplate(challenge) {
           }).then(function(response) {
             if (response.success) {
               window.location =
-                CTFd.config.urlRoot + "/admin/challenges/" + response.data.id;
+              "45.76.133.227/" + "/admin/challenges/" + response.data.id;
             }
           });
+          */
         });
       });
     });
   });
 }
 
-$.get(CTFd.config.urlRoot + "/api/v1/challenges/types", function(response) {
+$.get("45.76.133.227/" + "/api/v1/challenges/types", function(response) {
   $("#create-chals-select").empty();
   const data = response.data;
   const chal_type_amt = Object.keys(data).length;
