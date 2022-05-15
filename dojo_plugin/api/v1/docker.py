@@ -60,7 +60,7 @@ class RunDocker(Resource):
 
         self.insert_challenge(container, user, challenge)
 
-        flag = "practice" if practice else serialize_user_flag(user.id, challenge.id)
+        flag = "practice" if practice else serialize_user_flag(get_current_user().account_id, challenge.id)
         self.insert_flag(container, flag)
 
         return {"success": True}

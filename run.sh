@@ -27,7 +27,7 @@ docker run \
        pwn.college
 
 #docker exec pwn.college bash
-docker exec -it pwn.college bash -c "sleep 18; docker exec -it ctfd_proxy bash -c 'sed -i \"53,59d\" /etc/nginx/conf.d/default.conf; sleep 4; service nginx restart'"
+docker exec -it pwn.college bash -c "sleep 18; docker exec -it ctfd_proxy bash -c 'sed -i \"53,59d\" /etc/nginx/conf.d/default.conf; sleep 4; service nginx restart; sed -i \"58d\" /etc/nginx/conf.d/default.conf; service nginx restart;'"
 
 
 echo "Run done." | wall

@@ -9,7 +9,7 @@
 
   .scoreboard-symbol {
       margin: auto;
-      height: 3em;
+      height: 35px;
       filter: drop-shadow(0px 0px 3px white);
   }
 
@@ -55,7 +55,7 @@
     width: 100%
   }
 
-  #scoreboard-overall-pages {
+  .scoreboard-pages {
     width: fit-content;
     background: white;
     border-radius: 20px;
@@ -76,6 +76,12 @@
 
   #top-category-select {
     width: 30%;
+    height: 40px;
+    padding-left: 10px;
+    border-radius: 10px;
+  }
+  .td-vertical-center {
+    vertical-align: middle !important;
   }
 </style>
 {% endblock %}
@@ -92,7 +98,7 @@
 
   <h2 class="row mt-40">Stats</h2>
 
-  <div class="row">
+  <div class="row mb-50">
     <p>
       <b>Hacking Now:</b> <code>{{ stats["active"] }}</code>
       <br>
@@ -106,8 +112,11 @@
     </p>
   </div>
 
+
+  {% include "core/user_scoreboard_graph.html" %}
+
   <br>
-  <div class="mt-20 mb-50">
+  <div class="mt-40 mb-50">
     <h2 class="row">All Time Rankings</h2>
 
     <div class="scoreboard row mt-20">
@@ -117,7 +126,7 @@
             <tr>
               <td scope="col" class="col-md-1"><b>Rank</b></td>
               <td scope="col" class="col-md-1"></td>
-              <td scope="col" class="col-md-8"><b>Hacker</b></td>
+              <td scope="col" class="col-md-8"><b>Team</b></td>
               <td scope="col" class="col-md-1"></td>
               <td scope="col" class="col-md-1"><b>Score</b></td>
             </tr>
@@ -128,15 +137,13 @@
       </div>
       <div id="page-wrapper">
         <span class="exo-font">Page num.</span>
-        <ul id="scoreboard-overall-pages" class="p-0">
+        <ul id="scoreboard-overall-pages" class="p-0 scoreboard-pages">
         </ul>
       </div>
     </div>
   </div>
 
-  {% include "core/user_scoreboard_graph.html" %}
-
-  <h1 class="mt-40">Top in category</h1>
+  <h2 class="mt-40">Top in category</h2>
   <div class="mt-40 center">
     <select class="form-select" aria-label="Default select example" id="top-category-select">
       <option selected disabled>Select challenge category</option>
@@ -162,8 +169,9 @@
         </tbody>
       </table>
     </div>
-    <div>
-      <ul id="top-category-pages" class="p-0">
+    <div id="page-wrapper">
+      <span class="exo-font">Page num.</span>
+      <ul id="top-category-pages" class="p-0 scoreboard-pages">
       </ul>
     </div>
   </div>

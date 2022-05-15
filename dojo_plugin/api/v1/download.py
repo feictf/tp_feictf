@@ -13,11 +13,10 @@ CHALLENGES_DIR = pathlib.Path("/var/challenges")
 
 download_namespace = Namespace("download")
 
-@download_namespace.route("/<path:filename>")
+@download_namespace.route("/<path:category>/<path:filename>")
 class downloadBinary(Resource):
-    def get(self, filename):
-        #tmp = "/" + category + "/" + filename + "/" + filename
-        uploads = os.path.join(current_app.root_path, get_app_config('UPLOAD_FOLDER'))
-        return send_from_directory(directory=uploads, filename=filename)
-        return path.exists("logs.txt")
+    def get(self, category, filename):
+        tmp = category + "/" + filename + "/" + filename
+        challenges_folder = os.path.join(current_app.root_path, "/var/challenges/" + tmp)
+        return send_from_directory(directory=challenges_folder, filename=filename)
 

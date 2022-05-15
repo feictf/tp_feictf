@@ -32,7 +32,7 @@ services:
       - ./data/CTFd/logs:/var/log/CTFd
       - ./data/CTFd/uploads:/var/uploads
       - ./data/homes:/var/homes:shared
-      - ./data/challenges:/var/challenges:ro
+      - ./data/challenges:/var/challenges
       - ./CTFd:/opt/CTFd:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
     depends_on:

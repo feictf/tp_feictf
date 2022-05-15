@@ -6,6 +6,7 @@ from flask_restx import Namespace, Resource
 from sqlalchemy import func as sa_func
 from sqlalchemy.sql import and_, false, true
 
+from CTFd.plugins.flags import FlagException, get_flag_class
 from CTFd.api.v1.helpers.request import validate_args
 from CTFd.api.v1.helpers.schemas import sqlalchemy_to_pydantic
 from CTFd.api.v1.schemas import APIDetailedSuccessResponse, APIListSuccessResponse
@@ -703,6 +704,19 @@ class ChallengeAttempt(Resource):
                     challenge_id=challenge_id,
                     kpm=kpm,
                 )
+
+                # toto som pridal ja jakub a ma to byt pre cheaterov
+                # submission=request_data.get("submission", "").encode("utf-8")
+                # flags = Flags.query.filter_by(challenge_id=challenge.id).all()
+                # for flag in flags:
+                #     try:
+                #         if get_flag_class(flag.type).compare(flag, submission):
+                #             return {
+                #                 "success": True,
+                #                 "data": {"status": "cheat", "message": "cheat"},
+                #             }
+                #     except FlagException as e:
+                #         return False, str(e)
 
                 if max_tries:
                     # Off by one since fails has changed since it was gotten
