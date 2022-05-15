@@ -52,16 +52,6 @@
             </span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{{ url_for('views.notifications') }}">
-            <span class="d-block" data-toggle="tooltip" data-placement="bottom" title="Add challenges">
-              <i class="fas fa-wrench d-none d-md-block d-lg-none"></i>
-            </span>
-            <span class="d-sm-block d-md-none d-lg-block">
-              <i class="fas fa-plus pr-1"></i>Add challenges
-            </span>
-          </a>
-        </li>
         {% endif %}
         {% if Configs.user_mode == "teams" %}
         <li class="nav-item">

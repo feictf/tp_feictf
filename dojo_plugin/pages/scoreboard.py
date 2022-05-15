@@ -3,7 +3,7 @@ import datetime
 import docker
 from flask import render_template
 from sqlalchemy.sql import or_, and_
-from CTFd.models import db, Users, Solves, Challenges
+from CTFd.models import db, Users, Solves, Challenges, Teams
 from CTFd.cache import cache
 from CTFd.utils.helpers import get_infos
 from CTFd.utils.user import get_current_user
@@ -45,6 +45,7 @@ def get_stats():
         "users": int(Users.query.count()),
         "challenges": int(Challenges.query.count()),
         "solves": int(Solves.query.count()),
+        "teams": int(Teams.query.count()),
     }
 
 
