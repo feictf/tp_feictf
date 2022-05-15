@@ -36,6 +36,47 @@
       font-weight: bold;
   }
 
+  .mt-40 {
+    margin-top: 40px;
+  }
+
+  .mt-20 {
+    margin-top: 20px;
+  }
+
+  .mb-50 {
+    margin-bottom: 50px;
+  }
+
+  #page-wrapper {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    width: 100%
+  }
+
+  #scoreboard-overall-pages {
+    width: fit-content;
+    background: white;
+    border-radius: 20px;
+    margin-left: 10px;
+  }
+
+  .exo-font {
+    font-family: 'Exo';
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  #top-category-wrapper {
+    display: none;
+  }
+
+  #top-category-select {
+    width: 30%;
+  }
 </style>
 {% endblock %}
 
@@ -49,7 +90,7 @@
 <div class="container">
   {% include "components/errors.html" %}
 
-  <h2 class="row">Stats</h2>
+  <h2 class="row mt-40">Stats</h2>
 
   <div class="row">
     <p>
@@ -64,40 +105,46 @@
   </div>
 
   <br>
+  <div class="mt-20 mb-50">
+    <h2 class="row">All Time Rankings</h2>
 
-  <h2 class="row">All Time Rankings</h2>
-
-  <div class="scoreboard row">
-    <div class="col-md-12 p-0">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <td scope="col" class="col-md-1"><b>Rank</b></td>
-            <td scope="col" class="col-md-1"></td>
-            <td scope="col" class="col-md-8"><b>Hacker</b></td>
-            <td scope="col" class="col-md-1"></td>
-            <td scope="col" class="col-md-1"><b>Score</b></td>
-          </tr>
-        </thead>
-        <tbody id="scoreboard-overall">
-        </tbody>
-      </table>
-    </div>
-    <div>
-      <ul id="scoreboard-overall-pages" class="p-0">
-      </ul>
+    <div class="scoreboard row mt-20">
+      <div class="col-md-12 p-0">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <td scope="col" class="col-md-1"><b>Rank</b></td>
+              <td scope="col" class="col-md-1"></td>
+              <td scope="col" class="col-md-8"><b>Hacker</b></td>
+              <td scope="col" class="col-md-1"></td>
+              <td scope="col" class="col-md-1"><b>Score</b></td>
+            </tr>
+          </thead>
+          <tbody id="scoreboard-overall">
+          </tbody>
+        </table>
+      </div>
+      <div id="page-wrapper">
+        <span class="exo-font">Page num.</span>
+        <ul id="scoreboard-overall-pages" class="p-0">
+        </ul>
+      </div>
     </div>
   </div>
 
   {% include "core/user_scoreboard_graph.html" %}
-<select class="form-select" aria-label="Default select example" onchange="" id="selectik">
-  <option selected>Open this select menu</option>
-  {% for module in modules %}
-    <option value={{ module.name }}>{{ module.name }}</option>    
-  {% endfor %}
-</select>
+
+  <h1 class="mt-40">Top in category</h1>
+  <div class="mt-40 center">
+    <select class="form-select" aria-label="Default select example" id="top-category-select">
+      <option selected disabled>Select challenge category</option>
+      {% for module in modules %}
+        <option value={{ module.name }}>{{ module.name }}</option>    
+      {% endfor %}
+    </select>
+  </div>
   
-  <div class="scoreboard row">
+  <div class="scoreboard row" id="top-category-wrapper">
     <div class="col-md-12 p-0">
       <table class="table table-striped">
         <thead>

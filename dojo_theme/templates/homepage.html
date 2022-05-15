@@ -1,22 +1,74 @@
 {% extends "base.html" %}
 
 {% block stylesheets %}
-
+<style>
+    .jumbo-custom {
+        height: 100vh;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+    .abs-container {
+        top: 375px;
+        position: absolute;
+    }
+    .course-info {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        flex-direction: row;
+        border-bottom: 2px solid;
+        margin-bottom: 10px;
+    }
+    .course-name {
+        font-size: 50px;
+        font-weight: bold;
+        font-family: 'Exo';
+        color: #5a89f7;
+        margin-left: 25px;
+    }
+    .icon-style {
+        font-size: 45px;
+    }
+    .urls a {
+        font-family: "Exo";
+    }
+    .urls a:hover {
+        color: #63c0f5
+    }
+</style>
 {% endblock %}
 
 
 {% block content %}
-<div class="jumbotron">
-    <div class="container center-content">
-        <h1>I - BISPP</h1>
+<div class="jumbotron jumbo-custom">
+    <div class="container center-content abs-container">
+        <div class="course-info">
+            <i class="fas fa-terminal fa-2xl icon-style"></i>
+            <span class="course-name">I - BISPP</span>
+        </div>
         <div class="urls">
-            <h5><a href="https://uim.fei.stuba.sk/predmet/i-bispp/">Webstránka</a></h5>
-            <span class="mr-10 ml-10">|</span>
-            <h5><a href="https://is.stuba.sk/auth/katalog/syllabus.pl?predmet=353772">Sylabus</a></h5>
+            <h5 style="font-size: 25px;"><a href="https://uim.fei.stuba.sk/predmet/i-bispp/">Webstránka</a></h5>
+            <span class="mr-10 ml-10" style="font-size: 21px;">|</span>
+            <h5 style="font-size: 25px;"><a href="https://is.stuba.sk/auth/katalog/syllabus.pl?predmet=353772">Sylabus</a></h5>
         </div>
     </div>
-    <div>CONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENTCONTENT</div>
 </div>
+
+
+</div><script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"
+    integrity="sha512-z4OUqw38qNLpn1libAN9BsoDx6nbNFio5lA6CuTp9NlK83b89hgyCVq+N5FdBJptINztxn1Z3SaKSKUS5UP60Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    anime({
+        targets: ".fa-terminal",
+        opacity: 0,
+        duration: 1000,
+        loop: true,
+        easing: "linear",
+        direction: "alternate"
+    });
+</script>
 {% endblock %}
 
 {% block scripts %}

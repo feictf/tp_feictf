@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 
 {% block stylesheets %}
+<style>
+.info-left {
+	font-size: 2rem;
+	font-family: Exo;
+	color: #5a89f7;
+}
+
+.info-right {
+	font-size: 2rem;
+	font-family: Exo;
+	font-weight: bold;
+}
+.graphs-wrapper {
+	background: white;
+    padding-top: 45px;
+    padding-bottom: 45px;
+    border-radius: 45px;
+	margin-top: 50px;
+	margin-bottom: 85px;
+}
+</style>
+
 {% endblock %}
 
 {% block content %}
@@ -30,23 +52,23 @@
 					{{ field.name }}: {{ field.value }}
 				</h3>
 			{% endfor %}
-			<h2 id="team-place" class="text-center">
+			<div id="team-place" class="text-center">
 				{# This intentionally hides the team's place when scores are hidden because this can be their internal profile
 			and we don't want to leak their place in the CTF. #}
 				{# Public page hiding is done at the route level #}
 				{% if scores_visible() %}
 					{% if place %}
-						{{ place }}
-						<small>place</small>
+						<span class="info-left">Place: </span>
+						<span class="info-right">{{ place }}</span>						
 					{% endif %}
 				{% endif %}
-			</h2>
-			<h2 id="team-score" class="text-center">
-				{% if score %}
-					{{ score }}
-					<small>points</small>
+			</div>
+			<div id="team-score" class="text-center">
+				{% if score %}				
+					<span class="info-left">Total points: </span>
+					<span class="info-right">{{ score }}</span>
 				{% endif %}
-			</h2>
+			</div>
 
 			<div class="pt-3">
 				{% if team.website and (team.website.startswith('http://') or team.website.startswith('https://')) %}
@@ -90,7 +112,7 @@
 		</div>
 
 		{% if solves or awards %}
-			<div class="row">
+			<div class="row graphs-wrapper">
 				<div class="col-md-6 d-none d-md-block d-lg-block">
 					<div id="keys-pie-graph" class="d-flex align-items-center">
 						<div class="text-center w-100">

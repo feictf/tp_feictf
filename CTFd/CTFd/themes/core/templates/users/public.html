@@ -1,6 +1,28 @@
 {% extends "base.html" %}
 
 {% block stylesheets %}
+<style>
+	.info-left {
+		font-size: 2rem;
+		font-family: Exo;
+		color: #5a89f7;
+	}
+
+	.info-right {
+		font-size: 2rem;
+		font-family: Exo;
+		font-weight: bold;
+	}
+
+	.graphs-wrapper {
+		background: white;
+		padding-top: 45px;
+		padding-bottom: 45px;
+		border-radius: 45px;
+		margin-top: 50px;
+		margin-bottom: 85px;
+	}
+</style>
 {% endblock %}
 
 {% block content %}
@@ -46,16 +68,18 @@
 			{% endfor %}
 
 			<div>
-				<h2 class="text-center">
+				<div class="text-center">
 					{% if account.place %}
-						{{ account.place }} <small>place</small>
+						<span class="info-left">Place: </span>
+						<span class="info-right">{{ account.place }}</span>
 					{% endif %}
-				</h2>
-				<h2 class="text-center">
+				</div>
+				<div class="text-center">
 					{% if account.place %}
-						{{ account.score }} <small>points</small>
+						<span class="info-left">Total points: </span>
+						<span class="info-right">{{ account.score }}</span>
 					{% endif %}
-				</h2>
+				</div>
 			</div>
 
 			<div class="pt-3">
@@ -74,7 +98,7 @@
 		{% set solves = user.solves %}
 		{% set awards = user.awards %}
 		{% if solves or awards %}
-			<div class="row">
+			<div class="row graphs-wrapper">
 				<div class="col-md-6 d-none d-md-block d-lg-block">
 					<div id="keys-pie-graph" class="d-flex align-items-center">
 						<div class="text-center w-100">
