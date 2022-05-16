@@ -17,5 +17,5 @@ Následne si treba naklonovať repozitár:
 Pri prvom spustení je treba definovať globálnu premennú **SETUP_HOSTNAME**, čiže v tomto prípade danú url či IP adresu alebo *localhost*.
 `SETUP\_HOSTNAME=localhost ./run.sh`
 
-*Poznámka: V prípade, že sa po úspešnom spustení na prehliadači objaví chyba 503, môže ísť o miskofinguráciu nginx pre vnútorný proxy\footnote{\url{https://github.com/pwncollege/dojo/issues/52}}.*
+*Poznámka: V prípade, že sa po úspešnom spustení na prehliadači objaví chyba 503, môže ísť o miskofinguráciu nginx pre vnútorný proxy https://github.com/pwncollege/dojo/issues/52.*
 
