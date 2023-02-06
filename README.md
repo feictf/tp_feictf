@@ -8,7 +8,7 @@ Medzi požiadavky na nainštalovanie vlastnej inštancie feictf patrí docker.
 `curl -fsSL https://get.docker.com | /bin/sh`
 
 Následne si treba naklonovať repozitár: 
-`git clone https://github.com/tp\_feictf`
+`git clone https://github.com/tp\_feictf.git`
 
 Ďalej treba upraviť prihlasovací port na ssh z 22 na iný (napríklad 2222) v súbore `etc/ssh/sshd\_config` a reštartovať ssh service:
 `service ssh restart`
