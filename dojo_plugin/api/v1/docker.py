@@ -184,4 +184,4 @@ class RunDocker(Resource):
 
     @staticmethod
     def insert_flag(container, flag):
-        container.exec_run(f"/bin/sh -c \"echo 'pwn.college{{{flag}}}' > /flag\"")
+        container.exec_run(f"/bin/sh -c \"echo 'feictf{{{flag}}}' > /flag\"")

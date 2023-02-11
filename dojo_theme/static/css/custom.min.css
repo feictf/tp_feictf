@@ -11,16 +11,16 @@ body, table, .form-control:focus, .close {
 }
 
 .navbar-brand, .nav-link, h1, h2 {
-    color: #5a89f7 !important;
+    color: #0f0 !important;
 }
 
 a {
-    color: #63c0f5;
+    color: #0f0;
     text-shadow: 0 0 5px rgba(104,182,255,0.15);
 }
 
 nav {
-    border-bottom: 1px dashed #5a89f7;
+    border-bottom: 1px dashed #0f0;
 }
 
 .modal-dialog {
@@ -28,7 +28,7 @@ nav {
 }
 
 .modal-content {
-    border: 1px dashed #5a89f7;
+    border: 1px dashed #0f0;
 }
 
 .navbar-brand, .nav-link, body, p, h1, h2, h3, h4, td {

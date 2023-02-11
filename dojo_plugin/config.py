@@ -51,7 +51,7 @@ def bootstrap():
         - name: Introduction
           permalink: introduction
           lectures:
-            - name: "Introduction: What is Computer Systems Security"
+            - name: "Introduction: What is Computer Systems Security?"
               video: bJTThdqui0g
               playlist: PL-ymxv0nOtqrxUaIefx0qEC7_155oPEb7
               slides: 1YlTxeZg03P234EgG4E4JNGcit6LZovAxfYGL1YSLwfc

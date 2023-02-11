@@ -705,18 +705,6 @@ class ChallengeAttempt(Resource):
                     kpm=kpm,
                 )
 
-                # toto som pridal ja jakub a ma to byt pre cheaterov
-                # submission=request_data.get("submission", "").encode("utf-8")
-                # flags = Flags.query.filter_by(challenge_id=challenge.id).all()
-                # for flag in flags:
-                #     try:
-                #         if get_flag_class(flag.type).compare(flag, submission):
-                #             return {
-                #                 "success": True,
-                #                 "data": {"status": "cheat", "message": "cheat"},
-                #             }
-                #     except FlagException as e:
-                #         return False, str(e)
 
                 if max_tries:
                     # Off by one since fails has changed since it was gotten

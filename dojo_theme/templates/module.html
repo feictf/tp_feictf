@@ -112,29 +112,24 @@
 
       <div id="challenge{{ loop.index }}" class="collapse" aria-labelledby="challengeHeading{{ loop.index }}" data-parent="#challenges">
         <div class="card-body">
+          
           <div class="row">
-            <div class="col-sm-4 form-group text-center">
+            <div class="col-sm-6 form-group text-center">
               <button id="challenge-start" type="submit" class="btn btn-md btn-outline-secondary w-100">
                 <span class="d-sm-block d-md-block d-lg-block">
                   <i class="fas fa-play fa-2x pr-3"></i>Start
                 </span>
               </button>
             </div>
-            <div class="col-sm-4 form-group text-center">
+            <div class="col-sm-6 form-group text-center">
               <button id="challenge-practice" type="submit" class="btn btn-md btn-outline-secondary w-100">
                 <span class="d-sm-block d-md-block d-lg-block">
                   <i class="fas fa-flask fa-2x pr-3"></i>Practice
                 </span>
               </button>
             </div>
-            <div class="col-sm-4 form-group text-center">
-              <a href="" id="challenge-download" type="submit" class="btn btn-md btn-outline-secondary w-100">
-                <span class="d-sm-block d-md-block d-lg-block">
-                  <i class="fas fa-download fa-2x pr-3"></i>Download binary
-                </span>
-              </a>
-            </div>
           </div>
+
           <div class="row submit-row">
             <div class="col-md-9 form-group">
               <input id="challenge-id" class="challenge-id" type="hidden" value="{{ challenge.id }}">
