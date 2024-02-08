@@ -14,7 +14,7 @@ Následne si treba naklonovať repozitár do '/opt/dojo':
 `service ssh restart`
 
 Pri prvom spustení je treba definovať globálnu premennú **SETUP_HOSTNAME**, čiže v tomto prípade danú url či IP adresu alebo *localhost*.
-`SETUP\_HOSTNAME=localhost ./run.sh`
+`SETUP_HOSTNAME=localhost ./run.sh`
 
 Prihlasovacie údaje do admin účtu sa nachádzajú v súbore `data/initial_credentials`.
 
