@@ -13,7 +13,7 @@ Následne si treba naklonovať repozitár do '/opt/dojo':
 Ďalej treba upraviť prihlasovací port na ssh z 22 na iný (napríklad 2222) v súbore `etc/ssh/sshd\_config` a reštartovať ssh service:
 `service ssh restart`
 
-Pri prvom spustení je treba definovať globálnu premennú **SETUP_HOSTNAME**, čiže v tomto prípade danú url či IP adresu alebo *localhost*.
+Pri prvom spustení je treba definovať globálnu premennú **SETUP\_HOSTNAME**, čiže v tomto prípade danú url či IP adresu alebo *localhost*.
 `SETUP\_HOSTNAME=localhost ./run.sh`
 
 Prihlasovacie údaje do admin účtu sa nachádzajú v súbore `data/initial_credentials`.
