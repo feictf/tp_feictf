@@ -91,26 +91,23 @@
 <div class="jumbotron">
   <div class="container center-content">
     <h1>Scoreboard</h1>
+  
+    <p>
+      <b>_hacking_now:</b> <code>{{ stats["active"] }}</code>
+      &nbsp;
+      <b>_hackers:</b> <code>{{ stats["users"] }}</code>
+      &nbsp;
+      <b>_teams:</b> <code>{{ stats["teams"] }}</code>
+      &nbsp;
+      <b>_challenges:</b> <code>{{ stats["challenges"] }}</code>
+      &nbsp;
+      <b>_solves:</b> <code>{{ stats["solves"] }}</code>
+    </p>
+
   </div>
 </div>
 <div class="container">
   {% include "components/errors.html" %}
-
-  <h2 class="row mt-40">Stats</h2>
-
-  <div class="row mb-50">
-    <p>
-      <b>Hacking Now:</b> <code>{{ stats["active"] }}</code>
-      <br>
-      <b>Hackers:</b> <code>{{ stats["users"] }}</code>
-      <br>
-      <b>Teams:</b> <code>{{ stats["teams"] }}</code>
-      <br>
-      <b>Challenges:</b> <code>{{ stats["challenges"] }}</code>
-      <br>
-      <b>Solves:</b> <code>{{ stats["solves"] }}</code>
-    </p>
-  </div>
 
 
   {% include "core/user_scoreboard_graph.html" %}
