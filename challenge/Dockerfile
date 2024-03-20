@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 ENV LC_CTYPE=C.UTF-8
 
 RUN dpkg --add-architecture i386
+
 RUN apt-get update && \
     dpkg -l | grep ^ii | cut -d' ' -f3 | grep -v '^libgcc-s1:amd64$' | xargs apt-get install -y --reinstall && \
     apt-get install -y sudo \
@@ -60,6 +61,7 @@ RUN apt-get update && \
                        diffutils \
                        elfutils \
                        findutils \
+                       firefox \
                        gnupg-utils \
                        keyutils \
                        pcaputils \
@@ -160,7 +162,9 @@ RUN git clone https://github.com/aflplusplus/aflplusplus /opt/aflplusplus && cd 
 RUN git clone https://github.com/yrp604/rappel /opt/rappel && cd /opt/rappel && make && cp bin/rappel /usr/bin/rappel
 RUN wget https://github.com/0vercl0k/rp/releases/download/v2.0.2/rp-lin-x64 -O /usr/bin/rp++ && chmod +x /usr/bin/rp++
 
-RUN pip install pwntools jupyter angr r2pipe asteval psutil flask selenium requests
+RUN pip install pwntools jupyter angr r2pipe asteval psutil flask selenium requests webdriver-manager
+
+RUN wget -q -O - https://github.com/mozilla/geckodriver/releases/download/v0.32.0/geckodriver-v0.32.0-linux64.tar.gz | tar xvz -C /usr/local/bin
 
 RUN git clone https://github.com/pwndbg/pwndbg /opt/pwndbg && cd /opt/pwndbg && ./setup.sh
 RUN git clone https://github.com/hugsy/gef /opt/gef
