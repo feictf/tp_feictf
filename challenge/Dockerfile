@@ -201,4 +201,6 @@ RUN find / -type f -perm -4000 | xargs -r chmod u-s
 
 RUN chmod u+s /opt/pwn.college/python /opt/pwn.college/vm/vm
 
+RUN echo source /opt/pwndbg/gdbinit.py >> ~/.gdbinit
+
 WORKDIR /home/hacker
