@@ -126,7 +126,7 @@ def bootstrap():
             description="",
             value=1,
             state="visible",
-            docker_image_name="pwncollege_challenge",
+            docker_image_name="pwncollege-challenge",
         )
         db.session.add(challenge)
         db.session.commit()
