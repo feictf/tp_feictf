@@ -203,4 +203,8 @@ RUN chmod u+s /opt/pwn.college/python /opt/pwn.college/vm/vm
 
 RUN echo source /opt/pwndbg/gdbinit.py >> ~/.gdbinit
 
+RUN echo "export HISTFILESIZE=5000" >> /home/hacker/.bashrc
+
+RUN echo "force_color_prompt=yes" >> /home/hacker/.bashrc
+
 WORKDIR /home/hacker
